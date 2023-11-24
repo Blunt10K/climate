@@ -7,32 +7,35 @@
 import smbus2
 import time
 
+SMBUS_ADDRESS = 1
+
 # Get I2C bus
-bus = smbus2.SMBus(1)
 
-# TMG39931 address, 0x39(57)
-# Select Enable register, 0x80(128)
-#		0x0F(15)	Power ON, ALS enable, Proximity enable, Wait disable
-bus.write_byte_data(0x39, 0x80, 0x0F)
-# TMG39931 address, 0x39(57)
-# Select ADC integration time register, 0x81(129)
-#		0x00(00)	ATIME : 712ms, Max count = 65535 cycles
-bus.write_byte_data(0x39, 0x81, 0x00)
-# TMG39931 address, 0x39(57)
-# Select Wait time register, 0x83(131)
-#		0xFF(255)	WTIME : 2.78ms
-bus.write_byte_data(0x39, 0x83, 0xFF)
-# TMG39931 address, 0x39(57)
-# Select Control register, 0x8F(143)
-#		0x00(00)	AGAIN is 1x
-bus.write_byte_data(0x39, 0x8F, 0x00)
+with smbus2.SMBus(SMBUS_ADDRESS) as bus:
 
-time.sleep(0.8)
+    # TMG39931 address, 0x39(57)
+    # Select Enable register, 0x80(128)
+    #		0x0F(15)	Power ON, ALS enable, Proximity enable, Wait disable
+    bus.write_byte_data(0x39, 0x80, 0x0F)
+    # TMG39931 address, 0x39(57)
+    # Select ADC integration time register, 0x81(129)
+    #		0x00(00)	ATIME : 712ms, Max count = 65535 cycles
+    bus.write_byte_data(0x39, 0x81, 0x00)
+    # TMG39931 address, 0x39(57)
+    # Select Wait time register, 0x83(131)
+    #		0xFF(255)	WTIME : 2.78ms
+    bus.write_byte_data(0x39, 0x83, 0xFF)
+    # TMG39931 address, 0x39(57)
+    # Select Control register, 0x8F(143)
+    #		0x00(00)	AGAIN is 1x
+    bus.write_byte_data(0x39, 0x8F, 0x00)
 
-# TMG39931 address, 0x39(57)
-# Read data back from 0x94(148), 9 bytes
-# cData LSB, cData MSB, red LSB, red MSB, green LSB, green MSB, blue LSB, blue MSB, proximity
-data = bus.read_i2c_block_data(0x39, 0x94, 9)
+    time.sleep(0.8)
+
+    # TMG39931 address, 0x39(57)
+    # Read data back from 0x94(148), 9 bytes
+    # cData LSB, cData MSB, red LSB, red MSB, green LSB, green MSB, blue LSB, blue MSB, proximity
+    data = bus.read_i2c_block_data(0x39, 0x94, 9)
 
 # Convert the data
 cData = data[1] * 256.0 + data[0]
