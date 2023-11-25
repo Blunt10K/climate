@@ -16,16 +16,22 @@ dht_device = adafruit_dht.DHT22(PIN)
 # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
 
 while True:
-    humidity = dht_device.humidity
-    temperature = dht_device.temperature
+    try:
+        humidity = dht_device.humidity
+        temperature = dht_device.temperature
 
-    # Note that sometimes you won't get a reading and
-    # the results will be null (because Linux can't
-    # guarantee the timing of calls to read the sensor).
-    # If this happens try again!
-    if humidity is not None and temperature is not None:
-        print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity))
-    else:
-        print('Failed to get reading. Try again!')
+        # Note that sometimes you won't get a reading and
+        # the results will be null (because Linux can't
+        # guarantee the timing of calls to read the sensor).
+        # If this happens try again!
+        if humidity is not None and temperature is not None:
+            print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity))
+        else:
+            print('Failed to get reading. Try again!')
+    except RuntimeError as error:
+        pass
+    except Exception as error:
+        dht_device.exit()
+        raise error
 
     sleep(2)
