@@ -28,7 +28,7 @@ def readBmp180Id(addr=DEVICE):
     (chip_id, chip_version) = bus.read_i2c_block_data(addr, REG_ID, 2)
     return (chip_id, chip_version)
 
-def readBmp180(addr=DEVICE):
+def readBmp180(addr=0x77):
     # Register Addresses
     REG_CALIB  = 0xAA
     REG_MEAS   = 0xF4
