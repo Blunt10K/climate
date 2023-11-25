@@ -1,12 +1,12 @@
-import Adafruit_DHT
-
-# Sensor should be set to Adafruit_DHT.DHT11,
-# Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
-sensor = Adafruit_DHT.DHT22
+import adafruit_dht
 
 # Example using a Beaglebone Black with DHT sensor
 # connected to pin P8_11.
 PIN = '11'
+
+# Sensor should be set to Adafruit_DHT.DHT11,
+# Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
+dht_device = adafruit_dht.DHT22(PIN)
 
 # Example using a Raspberry Pi with DHT sensor
 # connected to GPIO23.
@@ -14,7 +14,8 @@ PIN = '11'
 
 # Try to grab a sensor reading.  Use the read_retry method which will retry up
 # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
-humidity, temperature = Adafruit_DHT.read_retry(sensor, PIN)
+humidity = dht_device.humidity
+temperature = dht_device.temperature
 
 # Note that sometimes you won't get a reading and
 # the results will be null (because Linux can't
