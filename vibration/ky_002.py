@@ -1,26 +1,27 @@
+# Required modules are imported and set up
 import RPi.GPIO as GPIO
 import time
   
 GPIO.setmode(GPIO.BCM)
-
-sensor = 27
-led = 22
-GPIO.setup(sensor, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-GPIO.setup(led, GPIO.OUT)
   
+# Here the input pin is declared to which the sensor is connected. Additionally the PullUP resistor is activated at the input.
+GPIO_PIN = 24
+GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
   
-#Function executed on signal detection
-def active(null):
-        GPIO.out(led,GPIO.HIGH)
-
-#On detecting signal (falling edge), active function will be activated.
-GPIO.add_event_detect(sensor, GPIO.FALLING, callback=active, bouncetime=100) 
+print ("Sensor test [press CTRL+C to finish the test]")
   
-# main program loop
+# This output function is executed when a signal is detected
+def ausgabeFunktion(null):
+        print("Signal detected")
+  
+# When a signal is detected (falling signal edge) the output function is executed
+GPIO.add_event_detect(GPIO_PIN, GPIO.FALLING, callback=ausgabeFunktion, bouncetime=100) 
+  
+# Main program loop
 try:
         while True:
                 time.sleep(1)
   
-# Scavenging work after the end of the program
+# Clean up after the program is finished
 except KeyboardInterrupt:
         GPIO.cleanup()
