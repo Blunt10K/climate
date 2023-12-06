@@ -1,24 +1,23 @@
-climate_monitoring:
-  - entrance:
-      - pressure:
-        - bmp180: sensor_1
-      - temperature:
-        - bmp180: sensor_1
-        - dht22: sensor_1
-      - humidity:
-        - dht22: sensor_1
-      - altitude:
-        - bmp180: sensor_1
-  - living_room:
-    - pressure:
-      - bmp180: sensor_1
-    - temperature:
-      - bmp180: sensor_1
-      - dht22: sensor_1
-    - humidity:
-      - dht22: sensor_1
-    - altitude:
-      - bmp180: sensor_1
-    - light:
-      - grove_TMG39931: sensor_1
-    
+entrance:
+  - pressure:
+    - bmp180: sensor_1
+  - temperature:
+    - bmp180: sensor_1
+    - dht22: sensor_1
+  - humidity:
+    - dht22: sensor_1
+  - altitude:
+    - bmp180: sensor_1
+living_room:
+  - pressure:
+    - bmp180: sensor_1
+  - temperature:
+    - bmp180: sensor_1
+    - dht22: sensor_1
+  - humidity:
+    - dht22: sensor_1
+  - altitude:
+    - bmp180: sensor_1
+  - light:
+    - grove_TMG39931: sensor_1
+  
