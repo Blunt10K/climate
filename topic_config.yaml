@@ -1,23 +1,17 @@
 entrance:
-  - pressure:
-    - bmp180: sensor_1
+  - pressure: bmp180
+  - humidity: dht22
+  - altitude: bmp180
   - temperature:
-    - bmp180: sensor_1
-    - dht22: sensor_1
-  - humidity:
-    - dht22: sensor_1
-  - altitude:
-    - bmp180: sensor_1
+    - bmp180
+    - dht22 
 living_room:
+  - humidity: dht22
+  - altitude: bmp180
+  - light: grove_TMG39931
   - pressure:
-    - bmp180: sensor_1
+    - bmp180
+    - sense_hat
   - temperature:
-    - bmp180: sensor_1
-    - dht22: sensor_1
-  - humidity:
-    - dht22: sensor_1
-  - altitude:
-    - bmp180: sensor_1
-  - light:
-    - grove_TMG39931: sensor_1
-  
+    - bmp180
+    - dht22
